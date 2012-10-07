@@ -1,0 +1,11 @@
+This is a POC server for collecting information from microgrid nodes
+
+Currently it accepts messages from nodes, stores node ip and serial number in memory and can display a html page with the nodes.
+
+Use MAVEN to build and jetty:run as maven goal to lounch the project. Set -Djetty.port=XXX to change port number
+
+use GET /mgserver/hello to test if server is working. Should reponde with "Hello Jersey..."
+
+use POST /mgserver/hello content type:"application/json" Payload: {"ip":"xxx","sernum":"zzz"} to add new node
+
+user GET /mgserver/status to get HTML page with nodes
