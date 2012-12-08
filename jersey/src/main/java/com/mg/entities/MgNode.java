@@ -23,6 +23,7 @@ public class MgNode {
 	/**
 	 * Nodes type
 	 */
+	@SuppressWarnings("unused")
 	private NODE_TYPE type;
 	
 	/**

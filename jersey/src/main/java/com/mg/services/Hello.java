@@ -1,6 +1,7 @@
 package com.mg.services;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -37,9 +38,10 @@ public class Hello {
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public String sayPlainTextHelloPost(RequestHello r) {		
 		logger.debug(r);		
-		MgNodesDao.addNode(new MgNode(r.getIp(), r.getSernum()));		
+		MgNodesDao.addNode(new MgNode(request.getRemoteAddr(), r.getSernum()));		
 		return "Hello from Jersey";
 	}	
 }
