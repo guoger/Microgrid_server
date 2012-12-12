@@ -45,7 +45,12 @@
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>6.3.1</version>
-		</dependency>		
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>1.9</version>
+		</dependency>	
 	</dependencies>
 	<build>
 		<finalName>mgserver-rip</finalName>

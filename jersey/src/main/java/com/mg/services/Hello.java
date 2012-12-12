@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import org.apache.log4j.Logger;
 
 import com.mg.dao.MgNodesDao;
+import com.mg.entities.JsonTestObject;
 import com.mg.entities.MgNode;
 import com.mg.entities.RequestHello;
 
@@ -34,6 +35,13 @@ public class Hello {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String sayPlainTextHello() {		
 		return "Hello Jersey, request received from: " + request.getRemoteAddr();
+	}
+	
+	@GET	
+	@Path("/jsontest")
+	@Produces(MediaType.APPLICATION_JSON)
+	public JsonTestObject getJsontest() {		
+		return new JsonTestObject();
 	}
 	
 	@POST
