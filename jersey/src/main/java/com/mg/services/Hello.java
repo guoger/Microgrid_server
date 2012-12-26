@@ -15,9 +15,13 @@ import com.mg.dao.MgNodesDao;
 import com.mg.entities.JsonTestObject;
 import com.mg.entities.MgNode;
 import com.mg.entities.RequestHello;
+import com.mg.utils.Utils;
 
 /**
  * Service for attaching nodes
+ * 
+ * Body example:
+ * {"sernum":"00001", "voltageUsing":5,"currentUsing":1}
  * 
  * @author Saulius Alisauskas 2012-10-05
  *
@@ -48,8 +52,11 @@ public class Hello {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String sayPlainTextHelloPost(RequestHello r) {		
-		logger.debug(r);		
-		MgNodesDao.addNode(new MgNode(request.getRemoteAddr(), r.getSernum()));		
+		logger.debug(r);
+		MgNode node = new MgNode(Utils.getOriginalAddress(request), r.getSernum());
+		node.setCurrentUsing(r.getCurrentUsing());
+		node.setVoltageUsing(r.getVoltageUsing());
+		MgNodesDao.addNode(node);		
 		return "Hello from Jersey";
 	}	
 }

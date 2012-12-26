@@ -27,7 +27,8 @@ public final class MgNodesDao {
 		if (!nodeList.contains(node)) {
 			nodeList.add(node);
 		} else {
-			logger.warn("Node " + node + " was already in the list");
+			// Update node status variables
+			nodeList.get(nodeList.indexOf(node)).updateState(node);
 		}
 	}
 	
