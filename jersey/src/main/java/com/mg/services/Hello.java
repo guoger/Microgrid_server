@@ -54,8 +54,10 @@ public class Hello {
 	public String sayPlainTextHelloPost(RequestHello r) {		
 		logger.debug(r);
 		MgNode node = new MgNode(Utils.getOriginalAddress(request), r.getSernum());
-		node.setCurrentUsing(r.getCurrentUsing());
-		node.setVoltageUsing(r.getVoltageUsing());
+		node.setCurrentOut(r.getCurrentOut());
+		node.setVoltageOut(r.getVoltageOut());
+		node.setVoltageIn(r.getVoltageIn());
+		node.setCurrentIn(r.getCurrentIn());
 		MgNodesDao.addNode(node);		
 		return "Hello from Jersey";
 	}	

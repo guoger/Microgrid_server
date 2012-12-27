@@ -9,71 +9,97 @@ package com.mg.entities;
  */
 public class RequestHello {
 
-	private String ip;
+	private String mIp;
 
 	/**
 	 * Node serial number (should be unique)
 	 */
-	private String sernum;
+	private String mSernum;
+
+	/**
+	 * Voltage feeding into the grid
+	 */
+	private int mVoltageIn;
+
+	/**
+	 * Current feeding into the grid
+	 */
+	private int mCurrentIn;
 
 	/**
 	 * Voltage that node is currently using (output voltage), in Volts
 	 */
-	private int voltageUsing;
+	private int mVoltageOut;
 
 	/**
 	 * Current that is currently being drawn from the node (output), in mA
 	 */
-	private int currentUsing;
+	private int mCurrentOut;
 
 	public RequestHello() {
 
 	}
 
-	public int getCurrentUsing() {
-		return currentUsing;
+	public int getCurrentIn() {
+		return mCurrentIn;
+	}
+
+	public int getCurrentOut() {
+		return mCurrentOut;
 	}
 
 	public String getIp() {
-		return ip;
+		return mIp;
 	}
 
 	/**
-	 * Get {@link #sernum}
+	 * Get {@link #mSernum}
 	 * 
 	 * @return
 	 */
 	public String getSernum() {
-		return sernum;
+		return mSernum;
 	}
 
-	public int getVoltageUsing() {
-		return voltageUsing;
+	public int getVoltageIn() {
+		return mVoltageIn;
 	}
 
-	public void setCurrentUsing(int currentUsing) {
-		this.currentUsing = currentUsing;
+	public int getVoltageOut() {
+		return mVoltageOut;
+	}
+
+	public void setCurrentIn(int currentIn) {
+		this.mCurrentIn = currentIn;
+	}
+
+	public void setCurrentOut(int currentUsing) {
+		this.mCurrentOut = currentUsing;
 	}
 
 	public void setIp(String ip) {
-		this.ip = ip;
+		this.mIp = ip;
 	}
 
 	/**
-	 * Set {@link #sernum}
+	 * Set {@link #mSernum}
 	 * 
 	 * @param sernum
 	 */
 	public void setSernum(String sernum) {
-		this.sernum = sernum;
+		this.mSernum = sernum;
 	}
 
-	public void setVoltageUsing(int voltageUsing) {
-		this.voltageUsing = voltageUsing;
+	public void setVoltageIn(int voltageIn) {
+		this.mVoltageIn = voltageIn;
+	}
+
+	public void setVoltageOut(int voltageUsing) {
+		this.mVoltageOut = voltageUsing;
 	}
 
 	@Override
 	public String toString() {
-		return "HelloRequest [sernum=" + sernum + "]";
+		return "HelloRequest [sernum=" + mSernum + "]";
 	}
 }

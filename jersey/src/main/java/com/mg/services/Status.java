@@ -1,5 +1,10 @@
 package com.mg.services;
 
+import java.security.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -24,19 +29,25 @@ public class Status {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<h1>Nodes</h1>");
 		sb.append("<table border=\"1\"><tr>");
-		sb.append("<th>IP</th>" + "<th>Serial</th>" + "<th>outputVoltage (V)</th>" + "<th>outputCurrent (mA)</th>"
-				+ "<th>outputPower (W)</th>" + "<th>requestedVoltage (V)</th>" + "<th>requestedCurrent (mA)</th>"
-				+ "<th>requestedPower (W)</th>");
+		sb.append("<th>Last update</th>" + "<th>IP</th>" + "<th>Serial</th>" + "<th>outputVoltage (V)</th>"
+				+ "<th>outputCurrent (mA)</th>" + "<th>outputPower (W)</th>" + "<th>inputVoltage(V)</th>"
+				+ "<th>rinputCurrent(mA)</th>" + "<th>inputPower (W)</th>" + "<th>requestedVoltage (V)</th>"
+				+ "<th>requestedCurrent (mA)</th>" + "<th>requestedPower (W)</th>");
 		sb.append("</tr>");
 
 		List<MgNode> list = MgNodesDao.getNodesList();
+		SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
 		for (MgNode node : list) {
 			sb.append("<tr>");
+			sb.append("<td>").append(format.format(new Date(node.getLastUpdated()))).append("</td>");
 			sb.append("<td>").append(node.getIpAddress()).append("</td>");
 			sb.append("<td>").append(node.getSerialNumber()).append("</td>");
-			sb.append("<td>").append(node.getVoltageUsing()).append("</td>");
-			sb.append("<td>").append(node.getCurrentUsing()).append("</td>");
+			sb.append("<td>").append(node.getVoltageOut()).append("</td>");
+			sb.append("<td>").append(node.getCurrentOut()).append("</td>");
 			sb.append("<td>").append(node.getOutputPower()).append("</td>");
+			sb.append("<td>").append(node.getVoltageIn()).append("</td>");
+			sb.append("<td>").append(node.getCurrentIn()).append("</td>");
+			sb.append("<td>").append(node.getInputPower()).append("</td>");
 			sb.append("<td>").append(node.getVoltageRequested()).append("</td>");
 			sb.append("<td>").append(node.getCurrentRequested()).append("</td>");
 			sb.append("<td>").append(node.getRequestedPower()).append("</td>");
@@ -45,9 +56,9 @@ public class Status {
 		sb.append("</table>");
 
 		sb.append("<h1>Power</h1><ul>");
-		sb.append("<li>Max requested:").append(calculatePowerMaxRequested()).append("</li>");
-		sb.append("<li>Currently using:").append(calculatePowerCurrentlyUsing()).append("</li>");
-		sb.append("<li>Currently producing:").append("NOT IMPLEMENTED").append("</li>");
+		sb.append("<li>Max requested:").append(calculatePowerMaxRequested() + " W").append("</li>");
+		sb.append("<li>Currently using:").append(calculatePowerCurrentlyUsing() + " W").append("</li>");
+		sb.append("<li>Currently producing:").append(calculatePowerAvailableTotal() + " W").append("</li>");
 
 		return sb.toString();
 	}
@@ -71,7 +82,16 @@ public class Status {
 		float power = 0;
 		List<MgNode> list = MgNodesDao.getNodesList();
 		for (MgNode node : list) {
-			power += (node.getCurrentUsing() * node.getVoltageUsing()) / 1000.0f;
+			power += (node.getCurrentOut() * node.getVoltageOut()) / 1000.0f;
+		}
+		return power;
+	}
+
+	private float calculatePowerAvailableTotal() {
+		float power = 0;
+		List<MgNode> list = MgNodesDao.getNodesList();
+		for (MgNode node : list) {
+			power += (node.getCurrentIn() * node.getVoltageIn()) / 1000.0f;
 		}
 		return power;
 	}
