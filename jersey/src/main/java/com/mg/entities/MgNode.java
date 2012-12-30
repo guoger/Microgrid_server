@@ -18,32 +18,32 @@ public class MgNode {
 	/**
 	 * Voltage feeding into the grid
 	 */
-	private int mVoltageIn;
+	private float mVoltageIn;
 
 	/**
 	 * Current feeding into the grid
 	 */
-	private int mCurrentIn;
+	private float mCurrentIn;
 
 	/**
 	 * Voltage requested by node (type load) to be converted for user, in Volts
 	 */
-	private int mVoltageRequested;
+	private float mVoltageRequested;
 
 	/**
 	 * Current requested by node (type load), in relation to {@link #mVoltageRequested}, in mA
 	 */
-	private int mVurrentRequested;
+	private float mVurrentRequested;
 
 	/**
 	 * Voltage that node is currently using (output voltage), in Volts
 	 */
-	private int mVoltageOut;
+	private float mVoltageOut;
 
 	/**
 	 * Current that is currently being drawn from the node (output), in mA
 	 */
-	private int mCurrentOut;
+	private float mCurrentOut;
 
 	/**
 	 * Nodes serial number
@@ -75,15 +75,15 @@ public class MgNode {
 		return false;
 	}
 
-	public int getCurrentIn() {
+	public float getCurrentIn() {
 		return mCurrentIn;
 	}
 
-	public int getCurrentOut() {
+	public float getCurrentOut() {
 		return mCurrentOut;
 	}
 
-	public int getCurrentRequested() {
+	public float getCurrentRequested() {
 		return mVurrentRequested;
 	}
 
@@ -111,19 +111,19 @@ public class MgNode {
 		return mSerialNumber;
 	}
 
-	public int getVoltageIn() {
+	public float getVoltageIn() {
 		return mVoltageIn;
 	}
 
-	public int getVoltageOut() {		
+	public float getVoltageOut() {		
 		return mVoltageOut;
 	}
 
-	public int getVoltageRequested() {
+	public float getVoltageRequested() {
 		return mVoltageRequested;
 	}
 
-	public void setCurrentIn(int currentIn) {		
+	public void setCurrentIn(float currentIn) {		
 		mCurrentIn = currentIn;
 	}
 
@@ -132,15 +132,15 @@ public class MgNode {
 	 * 
 	 * @param currentUsing
 	 */
-	public void setCurrentOut(int currentUsing) {		
+	public void setCurrentOut(float currentUsing) {		
 		mCurrentOut = currentUsing;
 	}
 
-	public void setCurrentRequested(int currentRequested) {
+	public void setCurrentRequested(float currentRequested) {
 		mVurrentRequested = currentRequested;
 	}
 
-	public void setVoltageIn(int voltageIn) {		
+	public void setVoltageIn(float voltageIn) {		
 		mVoltageIn = voltageIn;
 	}
 
@@ -149,7 +149,7 @@ public class MgNode {
 	 * 
 	 * @param voltageUsing
 	 */
-	public void setVoltageOut(int voltageUsing) {		
+	public void setVoltageOut(float voltageUsing) {		
 		mVoltageOut = voltageUsing;
 	}
 

@@ -9,6 +9,9 @@ package com.mg.entities;
  */
 public class RequestHello {
 
+	
+	private String mBangState;
+	
 	private String mIp;
 
 	/**
@@ -19,32 +22,36 @@ public class RequestHello {
 	/**
 	 * Voltage feeding into the grid
 	 */
-	private int mVoltageIn;
+	private float mVoltageIn;
 
 	/**
 	 * Current feeding into the grid
 	 */
-	private int mCurrentIn;
+	private float mCurrentIn;
 
 	/**
 	 * Voltage that node is currently using (output voltage), in Volts
 	 */
-	private int mVoltageOut;
+	private float mVoltageOut;
 
 	/**
 	 * Current that is currently being drawn from the node (output), in mA
 	 */
-	private int mCurrentOut;
+	private float mCurrentOut;
 
 	public RequestHello() {
 
 	}
 
-	public int getCurrentIn() {
+	public String getBangState() {
+		return mBangState;
+	}
+
+	public float getCurrentIn() {
 		return mCurrentIn;
 	}
 
-	public int getCurrentOut() {
+	public float getCurrentOut() {
 		return mCurrentOut;
 	}
 
@@ -61,19 +68,23 @@ public class RequestHello {
 		return mSernum;
 	}
 
-	public int getVoltageIn() {
+	public float getVoltageIn() {
 		return mVoltageIn;
 	}
 
-	public int getVoltageOut() {
+	public float getVoltageOut() {
 		return mVoltageOut;
 	}
 
-	public void setCurrentIn(int currentIn) {
+	public void setBangState(String bangState) {
+		this.mBangState = bangState;
+	}
+
+	public void setCurrentIn(float currentIn) {
 		this.mCurrentIn = currentIn;
 	}
 
-	public void setCurrentOut(int currentUsing) {
+	public void setCurrentOut(float currentUsing) {
 		this.mCurrentOut = currentUsing;
 	}
 
@@ -90,11 +101,11 @@ public class RequestHello {
 		this.mSernum = sernum;
 	}
 
-	public void setVoltageIn(int voltageIn) {
+	public void setVoltageIn(float voltageIn) {
 		this.mVoltageIn = voltageIn;
 	}
 
-	public void setVoltageOut(int voltageUsing) {
+	public void setVoltageOut(float voltageUsing) {
 		this.mVoltageOut = voltageUsing;
 	}
 

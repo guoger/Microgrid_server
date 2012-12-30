@@ -31,7 +31,7 @@ public class Status {
 		sb.append("<table border=\"1\"><tr>");
 		sb.append("<th>Last update</th>" + "<th>IP</th>" + "<th>Serial</th>" + "<th>outputVoltage (V)</th>"
 				+ "<th>outputCurrent (mA)</th>" + "<th>outputPower (W)</th>" + "<th>inputVoltage(V)</th>"
-				+ "<th>rinputCurrent(mA)</th>" + "<th>inputPower (W)</th>" + "<th>requestedVoltage (V)</th>"
+				+ "<th>inputCurrent(mA)</th>" + "<th>inputPower (W)</th>" + "<th>requestedVoltage (V)</th>"
 				+ "<th>requestedCurrent (mA)</th>" + "<th>requestedPower (W)</th>");
 		sb.append("</tr>");
 
@@ -42,27 +42,31 @@ public class Status {
 			sb.append("<td>").append(format.format(new Date(node.getLastUpdated()))).append("</td>");
 			sb.append("<td>").append(node.getIpAddress()).append("</td>");
 			sb.append("<td>").append(node.getSerialNumber()).append("</td>");
-			sb.append("<td>").append(node.getVoltageOut()).append("</td>");
-			sb.append("<td>").append(node.getCurrentOut()).append("</td>");
-			sb.append("<td>").append(node.getOutputPower()).append("</td>");
-			sb.append("<td>").append(node.getVoltageIn()).append("</td>");
-			sb.append("<td>").append(node.getCurrentIn()).append("</td>");
-			sb.append("<td>").append(node.getInputPower()).append("</td>");
-			sb.append("<td>").append(node.getVoltageRequested()).append("</td>");
-			sb.append("<td>").append(node.getCurrentRequested()).append("</td>");
-			sb.append("<td>").append(node.getRequestedPower()).append("</td>");
+			sb.append("<td>").append(formatFloat(node.getVoltageOut())).append("</td>");
+			sb.append("<td>").append(formatFloat(node.getCurrentOut())).append("</td>");
+			sb.append("<td>").append(formatFloat(node.getOutputPower())).append("</td>");
+			sb.append("<td>").append(formatFloat(node.getVoltageIn())).append("</td>");
+			sb.append("<td>").append(formatFloat(node.getCurrentIn())).append("</td>");
+			sb.append("<td>").append(formatFloat(node.getInputPower())).append("</td>");
+			sb.append("<td>").append(formatFloat(node.getVoltageRequested())).append("</td>");
+			sb.append("<td>").append(formatFloat(node.getCurrentRequested())).append("</td>");
+			sb.append("<td>").append(formatFloat(node.getRequestedPower())).append("</td>");
 			sb.append("</tr>");
 		}
 		sb.append("</table>");
 
 		sb.append("<h1>Power</h1><ul>");
-		sb.append("<li>Max requested:").append(calculatePowerMaxRequested() + " W").append("</li>");
-		sb.append("<li>Currently using:").append(calculatePowerCurrentlyUsing() + " W").append("</li>");
-		sb.append("<li>Currently producing:").append(calculatePowerAvailableTotal() + " W").append("</li>");
+		sb.append("<li>Max requested:").append(formatFloat(calculatePowerMaxRequested()) + " W").append("</li>");
+		sb.append("<li>Currently using:").append(formatFloat(calculatePowerCurrentlyUsing()) + " W").append("</li>");
+		sb.append("<li>Currently producing:").append(formatFloat(calculatePowerAvailableTotal()) + " W").append("</li>");
 
 		return sb.toString();
 	}
-
+	
+	private String formatFloat(float number) {
+		return String.format("%.2f", number);
+	}
+	
 	// TODO: move this to DAO class
 	/**
 	 * Calculate power requested by the nodes
